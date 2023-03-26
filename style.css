@@ -40,6 +40,12 @@ body {
   text-align: center;
 }
 
+#turn-info-container {
+  display: flex;
+  justify-content: center;
+  gap: 16rem;
+}
+
 #middle-container {
   background-color: var(--secondary-color);
   flex-grow: 1;
