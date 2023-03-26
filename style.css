@@ -1,55 +1,90 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@font-face {
+  font-family: "EightBitDragon";
+  src: url("/EightBitDragon-anqx.ttf") format("truetype");
+}
 
-/* Reset default styles */
+:root {
+  --primary-color: #201e20;
+  --secondary-color: #ddc3a5;
+  --secondary-darker: #e0a96d;
+  --border-color-dark: black;
+  --border-color-light: white;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Set up the main container */
 body {
+  background-color: var(--primary-color);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   min-height: 100vh;
-  font-family: Arial, sans-serif;
+  font-family: "EightBitDragon", sans-serif;
 }
 
-/* Style the individual containers */
 .container {
   width: 100%;
   max-width: 960px;
   padding: 1rem;
+  border: 2px solid var(--primary-color);
+  border-color: var(--primary-color);
 }
 
 #top-container {
+  background-color: var(--secondary-darker);
   text-align: center;
 }
 
 #middle-container {
+  background-color: var(--secondary-color);
   flex-grow: 1;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 #bottom-container {
+  background-color: var(--secondary-darker);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Style the health container */
 #health-container {
   display: flex;
   justify-content: space-around;
 }
 
-/* Style the button container */
 #button-container {
   display: flex;
   justify-content: center;
   gap: 1rem;
+}
+
+button {
+  background-color: var(--secondary-color);
+  padding: 2%;
+  border: 1px solid var(--border-color-dark);
+  border-color: var(--border-color-dark);
+  border-radius: 10px;
+  font-family: "EightBitDragon", sans-serif;
+}
+
+button:hover {
+  background-color: var(--secondary-darker);
+  outline: 0;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+.hide {
+  display: none;
 }
