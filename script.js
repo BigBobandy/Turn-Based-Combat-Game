@@ -28,11 +28,17 @@ const middleContainer = document.getElementById("middle-container");
 const turnCounterElement = document.getElementById("turn-counter");
 const whoseTurnElement = document.getElementById("whose-turn");
 const greetingMessage = document.getElementById("greeting-message");
+const battleInfoElement = document.getElementById("battle-info");
 
 let turnNumber = 1;
 
 function updateTurnCounter() {
   turnCounterElement.textContent = turnNumber;
+}
+
+function startGame() {
+  player.updateHealth(player.health);
+  enemy.updateHealth(enemy.health);
 }
 
 beginBtn.addEventListener("click", function () {
@@ -46,8 +52,18 @@ beginBtn.addEventListener("click", function () {
     "A dice must be rolled to decide who attacks first. The highest number goes first.";
   middleContainer.appendChild(rollMessage);
 
-  player.updateHealth(player.health);
-  enemy.updateHealth(enemy.health);
-
   updateTurnCounter();
 });
+
+rollBtn.addEventListener("click", function () {
+  playerRollResult = diceRoll();
+  enemyRollResult = diceRoll();
+  nextBtn.classList.remove("hide");
+  resultMessage = document.createElement("p");
+  resultMessage.innerText = `You rolled a ${playerRollResult} and the enemy rolled a ${enemyRollResult}.`;
+  middleContainer.appendChild(resultMessage);
+});
+
+function diceRoll() {
+  return 1 + Math.floor(Math.random() * 20);
+}
