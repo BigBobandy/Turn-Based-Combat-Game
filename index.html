@@ -9,5 +9,21 @@
     <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" />
     <script src="script.js" defer></script>
   </head>
-  <body></body>
+  <body>
+    <div id="top-container" class="container">
+      <h1>Turn-Based Combat Game</h1>
+      <div id="health-container" class="container">
+        <h2>Player Health:<span id="player-health"></span></h2>
+        <h2>Enemy Health: <span id="enemy-health"></span></h2>
+      </div>
+    </div>
+    <div id="middle-container" class="container"></div>
+    <div id="bottom-container" class="container">
+      <div id="button-container" class="container">
+        <button id="begin-btn" class="button hide">Begin</button>
+        <button id="roll-btn" class="button hide">Roll</button>
+        <button id="next-btn" class="button hide">Next Turn</button>
+      </div>
+    </div>
+  </body>
 </html>
