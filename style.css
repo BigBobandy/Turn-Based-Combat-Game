@@ -94,3 +94,7 @@ button:active {
 .hide {
   display: none;
 }
+
+.message {
+  word-spacing: 10px;
+}
