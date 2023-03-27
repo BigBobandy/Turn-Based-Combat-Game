@@ -14,6 +14,9 @@ const player = {
   attack: function () {
     return 1 + Math.floor(Math.random() * 10);
   },
+  missRoll: function () {
+    return 1 + Math.floor(Math.random() * 10);
+  },
 };
 
 //Object representing the enemy in the game
@@ -30,6 +33,9 @@ const enemy = {
     return 1 + Math.floor(Math.random() * 20);
   },
   attack: function () {
+    return 1 + Math.floor(Math.random() * 10);
+  },
+  missRoll: function () {
     return 1 + Math.floor(Math.random() * 10);
   },
 };
@@ -115,19 +121,31 @@ function handleNextTurnClick() {
   updateTurnCounter();
 
   if (player.isItMyTurn === true) {
-    damageNumber = player.attack();
-    enemy.updateHealth(enemy.health - damageNumber);
+    if (player.missRoll() === 1) {
+      turnMessage.innerText = `Your attack missed!`;
+      player.isItMyTurn = false;
+      enemy.isItMyTurn = true;
+    } else {
+      damageNumber = player.attack();
+      enemy.updateHealth(enemy.health - damageNumber);
 
-    turnMessage.innerText = `You hit the enemy for ${damageNumber}`;
-    player.isItMyTurn = false;
-    enemy.isItMyTurn = true;
+      turnMessage.innerText = `You hit the enemy for ${damageNumber}`;
+      player.isItMyTurn = false;
+      enemy.isItMyTurn = true;
+    }
   } else if (enemy.isItMyTurn === true) {
-    damageNumber = enemy.attack();
-    player.updateHealth(player.health - damageNumber);
+    if (enemy.missRoll() === 1) {
+      turnMessage.innerText = `The enemy's attack missed!`;
+      player.isItMyTurn = true;
+      enemy.isItMyTurn = false;
+    } else {
+      damageNumber = enemy.attack();
+      player.updateHealth(player.health - damageNumber);
 
-    turnMessage.innerText = `The enemy hit you for ${damageNumber}`;
-    player.isItMyTurn = true;
-    enemy.isItMyTurn = false;
+      turnMessage.innerText = `The enemy hit you for ${damageNumber}`;
+      player.isItMyTurn = true;
+      enemy.isItMyTurn = false;
+    }
   }
   whoseTurnIsItAnyway();
   isGameOver();
