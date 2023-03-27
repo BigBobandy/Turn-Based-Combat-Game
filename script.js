@@ -62,6 +62,7 @@ function handleBeginClick() {
   beginBtn.classList.add("hide");
   rollBtn.classList.remove("hide");
 
+  //Displays a message about rolling a dice to decide who gets to go first
   turnMessage.innerText =
     "A dice must be rolled to decide who attacks first. The highest number goes first.";
   middleContainer.appendChild(turnMessage);
@@ -71,10 +72,12 @@ function handleRollClick() {
   playerRollResult = player.diceRoll();
   enemyRollResult = enemy.diceRoll();
 
+  //If there is a tie, this informs the player and exits the function early
   if (handleTieAndReroll(playerRollResult, enemyRollResult)) {
-    return; // exits the function early if there's a tie
+    return;
   }
 
+  //Determines whose turn it is based on the dice roll
   if (playerRollResult > enemyRollResult) {
     player.isItMyTurn = true;
     turnMessage.innerText = `You rolled a ${playerRollResult} and the enemy rolled a ${enemyRollResult}. You get to attack first.`;
@@ -90,6 +93,7 @@ function handleRollClick() {
   whoseTurnIsItAnyway();
 }
 
+//If there is a tie in the dice roll this function is called which displays a message and then forces the player to roll again
 function handleTieAndReroll(playerRoll, enemyRoll) {
   if (playerRoll === enemyRoll) {
     turnMessage.innerText = "It's a tie! Roll again.";
@@ -107,14 +111,16 @@ function handleNextTurnClick() {
 //Calls the start game function
 startGame();
 
+//When this function is called it updates the turn counter element
 function updateTurnCounter() {
   turnCounterElement.textContent = turnNumber;
 }
 
+//This function displays whose turn it is (player's or enemy's)
 function whoseTurnIsItAnyway() {
   if (player.isItMyTurn === true) {
     whoseTurnElement.innerText = `Player's Turn`;
-  } else {
+  } else if (enemy.isItMyTurn === true) {
     whoseTurnElement.innerText = `Enemy's Turn`;
   }
 }
