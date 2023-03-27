@@ -11,6 +11,9 @@ const player = {
   diceRoll: function () {
     return 1 + Math.floor(Math.random() * 20);
   },
+  attack: function () {
+    return 1 + Math.floor(Math.random() * 10);
+  },
 };
 
 //Object representing the enemy in the game
@@ -25,6 +28,9 @@ const enemy = {
   },
   diceRoll: function () {
     return 1 + Math.floor(Math.random() * 20);
+  },
+  attack: function () {
+    return 1 + Math.floor(Math.random() * 10);
   },
 };
 
@@ -68,6 +74,7 @@ function handleBeginClick() {
   middleContainer.appendChild(turnMessage);
 }
 
+//This function is called when the roll button is clicked. Both the player and enemy roll a random number and and whoever wins goes first
 function handleRollClick() {
   playerRollResult = player.diceRoll();
   enemyRollResult = enemy.diceRoll();
@@ -106,6 +113,24 @@ function handleTieAndReroll(playerRoll, enemyRoll) {
 function handleNextTurnClick() {
   turnNumber++;
   updateTurnCounter();
+
+  if (player.isItMyTurn === true) {
+    damageNumber = player.attack();
+    enemy.updateHealth(enemy.health - damageNumber);
+
+    turnMessage.innerText = `You hit the enemy for ${damageNumber}`;
+    player.isItMyTurn = false;
+    enemy.isItMyTurn = true;
+  } else if (enemy.isItMyTurn === true) {
+    damageNumber = enemy.attack();
+    player.updateHealth(player.health - damageNumber);
+
+    turnMessage.innerText = `The enemy hit you for ${damageNumber}`;
+    player.isItMyTurn = true;
+    enemy.isItMyTurn = false;
+  }
+  whoseTurnIsItAnyway();
+  isGameOver();
 }
 
 //Calls the start game function
@@ -122,5 +147,22 @@ function whoseTurnIsItAnyway() {
     whoseTurnElement.innerText = `Player's Turn`;
   } else if (enemy.isItMyTurn === true) {
     whoseTurnElement.innerText = `Enemy's Turn`;
+  }
+}
+
+function isGameOver() {
+  if (player.health <= 0 || enemy.health <= 0) {
+    nextBtn.disabled = true;
+
+    let gameOverMessage;
+    if (player.health <= 0) {
+      gameOverMessage = "You have been defeated. Better luck next time!";
+    } else {
+      gameOverMessage = "Congratulations, you won!";
+    }
+
+    const gameOverElement = document.createElement("h1");
+    gameOverElement.innerText = gameOverMessage;
+    middleContainer.appendChild(gameOverElement);
   }
 }
