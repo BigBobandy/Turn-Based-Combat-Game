@@ -35,6 +35,9 @@ body {
   border-color: var(--primary-color);
 }
 
+#top-container h1 {
+  margin-bottom: 15px;
+}
 #top-container {
   background-color: var(--secondary-darker);
   text-align: center;
@@ -97,4 +100,6 @@ button:active {
 
 .message {
   word-spacing: 10px;
+  line-height: 2.5;
+  font-size: large;
 }
