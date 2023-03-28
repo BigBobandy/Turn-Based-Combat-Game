@@ -1,7 +1,4 @@
-@font-face {
-  font-family: "EightBitDragon";
-  src: url("/EightBitDragon-anqx.ttf") format("truetype");
-}
+@import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
 
 :root {
   --primary-color: #201e20;
@@ -24,7 +21,7 @@ body {
   align-items: center;
   justify-content: space-between;
   min-height: 100vh;
-  font-family: "EightBitDragon", sans-serif;
+  font-family: "VT323", monospace;
 }
 
 .container {
